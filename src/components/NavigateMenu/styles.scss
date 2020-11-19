@@ -1,0 +1,24 @@
+.navigate-menu{
+  position: absolute;
+  left: 0;
+  width: 80px;
+  min-height: 100%;
+  height: max-content;
+  background: #1b1d29;
+  &__logo{
+    margin: 20px 22px 44px 18px;
+    cursor: pointer;
+  }
+  &__icon{
+    margin: 14px 18px;
+    padding: 10px;
+    cursor: pointer;
+  }
+}
+.children {
+  min-height: 100vh;
+  background: #F5F7FA;
+  position: relative;
+  left: 80px;
+  width: calc(100% - 80px);
+}

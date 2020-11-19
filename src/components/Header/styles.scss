@@ -1,0 +1,17 @@
+.header{
+  height: 80px;
+  padding: 18px 10px 16px 32px;
+  display: flex;
+  background: white;
+  &__info{
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    &-title{
+      font-size: 13px;
+    }
+    &-text{
+      font-size: 19px;
+    }
+  }
+}

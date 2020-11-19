@@ -1,0 +1,51 @@
+.services {
+padding: 32px;
+  &__title{
+    font-size: 39px;
+    color: #262626;
+  }
+  &__filter{
+    padding-top: 16px;
+    &-text {
+      font-size: 11px;
+      color: #7D7D7D;
+    }
+    &-block {
+      padding-top: 7px;
+      display: flex;
+      flex-direction: row;
+      &-input {
+        padding-left: 17px;
+        height: 48px;
+        top: 24px;
+        background: #FFFFFF;
+        border: 1px solid #CFD2D9;
+        border-radius: 4px;
+        &:focus {
+          outline:none;
+          border: 1px solid #2F80ED;
+        }
+
+      }
+      &-button {
+        margin-left: 7px;
+        width: 149px;
+        height: 48px;
+        background: #F5F7FA;
+        border: 1px solid #CFD2D9;
+        box-sizing: border-box;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 19px;
+        color: #262626;
+        &:hover {
+          background: #e8eaee;
+          border: 1px solid #acafb5;
+        }
+      }
+    }
+  }
+}

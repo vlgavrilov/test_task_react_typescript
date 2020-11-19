@@ -1,0 +1,70 @@
+.promocode-card {
+  height: 120px;
+  background: white;
+  display: flex;
+  border: 1px solid #E2E5EC;
+  border-radius: 6px;
+  margin-top: 26px;
+  padding-top: 26px;
+  &__describe {
+    width: 40%;
+    padding: 0 0 0 32px;
+    &-title{
+      font-size: 29px;
+    }
+    &-description{
+      color: #7D7D7D;
+      margin-top: 5px;
+      font-size: 15px;
+    }
+  }
+  &__copy {
+    width: 30%;
+    &-title{
+      font-size: 11px;
+      color: #7D7D7D;
+    }
+    &-field {
+      position: relative;
+      margin-top: 7px;
+      height: 48px;
+      width: 300px;
+      background: #FFFFFF;
+      border: 1px solid #CFD2D9;
+      box-sizing: border-box;
+      border-radius: 4px;
+      cursor: pointer;
+      &-input {
+        border: 0;
+        outline:none;
+        padding: 13px 0 0 17px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      &-icon {
+        position: absolute;
+        padding: 15px;
+        right: 2px;
+        top: 0;
+        cursor: pointer;
+      }
+    }
+  }
+  &__activate {
+    margin-top: 22px;
+
+    width: 30%;
+    &-button {
+      width: 300px;
+      height: 48px;
+      background: #0085FF;
+      border-radius: 4px;
+      color: white;
+      text-align: center;
+      font-size: 19px;
+      display: table-cell;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+}
