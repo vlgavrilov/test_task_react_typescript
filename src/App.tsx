@@ -12,6 +12,7 @@ function App() {
       <Services />
       <Footer />
     </NavigateMenu>
+  //  There may be a route, but it is not required with one element.
   );
 }
 

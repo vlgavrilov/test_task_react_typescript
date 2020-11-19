@@ -1,4 +1,14 @@
-const mockData = {
+import { ICard } from '../Interface';
+
+interface IServerResponse {
+  bonuses: ICard[];
+  header: {
+    balance: number,
+    next_payout: number,
+    currency: string,
+  },
+}
+export const mockData :IServerResponse = {
   bonuses: [{
     title: 'Sitecostructor.io',
     description: 'Site constructor',
@@ -129,4 +139,9 @@ const mockData = {
   },
 };
 
-export default mockData;
+export const getAppointments = (params: string): ICard[] => {
+  const param = params.trim();
+  return mockData.bonuses.filter((item) => (item.title.indexOf(param) + 1)
+    || (item.description.indexOf(param) + 1)
+    || (item.link.indexOf(param) + 1));
+};

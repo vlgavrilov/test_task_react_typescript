@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles.scss';
-import mockData from '../../helpers/mockData';
+import { mockData } from '../../helpers/mockData';
 
-const Header = () => (
+const Header: React.FC = () => (
   <div className="header">
     <div className="header__info">
-      <div className="header__info-title">Balanse</div>
+      <div className="header__info-title">Balance</div>
       <div className="header__info-text">{mockData.header.balance}</div>
     </div>
     <div className="header__info">
