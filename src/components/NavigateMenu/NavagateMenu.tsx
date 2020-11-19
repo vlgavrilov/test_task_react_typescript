@@ -6,9 +6,7 @@ import menu_icon_active from '../../icon/menu_icon_active.svg';
 
 interface IProps {
   children: ReactNode;
-  // any other props that come into the component
 }
-// eslint-disable-next-line react/prop-types,@typescript-eslint/no-unused-vars
 const NavigateMenu = ({ children }: IProps) => (
   <div>
     <div className="navigate-menu">

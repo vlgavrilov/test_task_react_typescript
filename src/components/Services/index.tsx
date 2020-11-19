@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles.scss';
 import PromocodeCard from '../PromocodeCard';
+import mockData from '../../helpers/mockData';
 
 const Services = () => (
   <div className="services">
@@ -13,9 +14,14 @@ const Services = () => (
       </div>
     </div>
     <div>
-      <PromocodeCard />
-      <PromocodeCard />
-      <PromocodeCard />
+      {mockData.bonuses.map((item) => (
+        <PromocodeCard
+          title={item.title}
+          description={item.description}
+          promocode={item.promocode}
+        />
+      ))}
+
     </div>
   </div>
 );

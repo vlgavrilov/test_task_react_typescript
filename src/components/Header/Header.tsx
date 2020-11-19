@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.scss';
-import { mockData } from '../../helpers/mockData';
+import mockData from '../../helpers/mockData';
 
 const Header = () => (
   <div className="header">

@@ -2,9 +2,14 @@ import React, { useRef } from 'react';
 import './styles.scss';
 import icon_copy from '../../icon/copy.svg';
 
-const PromocodeCard = () => {
+interface IProps {
+  title: string;
+  description: string;
+  promocode: string;
+}
+
+const PromocodeCard = ({ title, description, promocode } : IProps) => {
   const inputEl = useRef<HTMLInputElement>(null);
-  const { title, description, promocode } = { title: 'Sitecostructor.io', description: 'Description', promocode: 'itpromocodes' };
   const copyPromo = () => {
     if (inputEl.current) {
       inputEl.current?.select();
