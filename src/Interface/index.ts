@@ -7,8 +7,14 @@ export interface ICard {
   isUsed: boolean
 }
 export interface IServerResponse {
-  bonuses: ICard[];
+  bonuses: ICard[]
   header: IHeader
+}
+export interface IState {
+  bonuses: ICard[]
+  header: IHeader
+  isBonusesLoading:boolean
+  isHeaderLoading:boolean
 }
 
 export interface IHeader {
@@ -33,5 +39,9 @@ export interface ISaveBonus {
   type: string
   payload: ICard[]
 }
+export interface ISaveIsLoading {
+  type: string
+  payload: boolean
+}
 
-export type SaveActionTypes = ISaveData | ISaveBonus;
+export type SaveActionTypes = ISaveData | ISaveBonus | ISaveIsLoading;

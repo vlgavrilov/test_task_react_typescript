@@ -1,10 +1,10 @@
 import React from 'react';
 import './styles.scss';
 import { useSelector } from 'react-redux';
-import { IHeader, IServerResponse } from '../../Interface';
+import { IHeader, IState } from '../../Interface';
 
 const Header: React.FC = () => {
-  const header = useSelector((state: IServerResponse):IHeader => state.header);
+  const header = useSelector((state: IState):IHeader => state.header);
   return (
     <div className="header">
       <div className="header__info">

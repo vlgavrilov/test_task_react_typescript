@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import './styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import PromocodeCard from '../PromocodeCard';
-import { ICard, IServerResponse } from '../../Interface';
+import { ICard, IState } from '../../Interface';
 import { POST_FILTER_BONUS } from '../../data/actionTypes';
 
 const Services: React.FC = () => {
   const [filter, setFilter] = useState('');
-  const bonuses = useSelector((state: IServerResponse):ICard[] => state.bonuses);
+  const bonuses = useSelector((state: IState):ICard[] => state.bonuses);
+  const isBonusesLoading = useSelector((state: IState):boolean => state.isBonusesLoading);
   const dispatch = useDispatch();
   const action = (value:string) => dispatch({ type: POST_FILTER_BONUS, value });
-
   const filterHandler = (value:string):void => {
     action(value);
     setFilter(value);
@@ -31,6 +31,7 @@ const Services: React.FC = () => {
         </div>
       </div>
       <div>
+        {isBonusesLoading && <div className="lds-dual-ring" />}
         {bonuses.map((item) => (
           <PromocodeCard
             id={item.id}

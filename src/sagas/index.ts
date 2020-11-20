@@ -1,16 +1,17 @@
 import {
-  put, takeEvery, all, select,
+  put, takeEvery, all, select, takeLatest,
 } from 'redux-saga/effects';
 import mockData from '../helpers/mockData';
 import {
+  BONUSES_LOADING,
   CHANGE_BONUS, POST_ACTIVATE_BONUS, POST_FILTER_BONUS, SAVE_DATA,
 } from '../data/actionTypes';
 import {
-  ICard, IActivateBonus, IServerResponse, IFilterBonus,
+  ICard, IActivateBonus, IFilterBonus, IState,
 } from '../Interface';
 
 const delay = (ms:number) => new Promise((res) => setTimeout(res, ms));
-export const getBonuses = (state:IServerResponse):ICard[] => state.bonuses;
+export const getBonuses = (state:IState):ICard[] => state.bonuses;
 
 function* downloadData() {
   yield delay(1000);
@@ -35,6 +36,22 @@ function* activateBonus(action:IActivateBonus) {
   });
 }
 function* filterBonus(action:IFilterBonus) {
+  yield put({
+    type: CHANGE_BONUS,
+    payload: [{
+      id: 0,
+      title: 'Title',
+      description: 'Description',
+      link: '',
+      promocode: '',
+      isUsed: false,
+    }],
+  });
+  yield put({
+    type: BONUSES_LOADING,
+    payload: true,
+  });
+
   yield delay(500);
   const newData = mockData.bonuses.filter((item:ICard) => (item.title.indexOf(action.value) + 1)
     || (item.description.indexOf(action.value) + 1)
@@ -43,12 +60,16 @@ function* filterBonus(action:IFilterBonus) {
     type: CHANGE_BONUS,
     payload: newData,
   });
+  yield put({
+    type: BONUSES_LOADING,
+    payload: false,
+  });
 }
 export function* watchActivateBonus() {
   yield takeEvery(POST_ACTIVATE_BONUS, activateBonus);
 }
 export function* watchFilterBonus() {
-  yield takeEvery(POST_FILTER_BONUS, filterBonus);
+  yield takeLatest(POST_FILTER_BONUS, filterBonus);
 }
 
 export default function* rootSaga() {
