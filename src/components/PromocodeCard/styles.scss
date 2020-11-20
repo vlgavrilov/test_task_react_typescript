@@ -66,5 +66,17 @@
       vertical-align: middle;
       cursor: pointer;
     }
+    &-message {
+      width: 300px;
+      height: 48px;
+      background: #717d86;
+      border-radius: 4px;
+      color: white;
+      text-align: center;
+      font-size: 19px;
+      display: table-cell;
+      vertical-align: middle;
+      cursor: no-drop;
+    }
   }
 }

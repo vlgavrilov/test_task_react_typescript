@@ -31,16 +31,21 @@ const PromocodeCard: React.FC<ICard> = ({
         </div>
       </div>
       <div className="promocode-card__activate">
+        {isUsed && (
+          <div className="promocode-card__activate-message">
+            Activated!
+          </div>
+        )}
         {!isUsed && (
-        <div
-          className="promocode-card__activate-button"
-          role="button"
-          tabIndex={-1}
-          onKeyPress={() => action(POST_ACTIVATE_BONUS)}
-          onClick={() => action(POST_ACTIVATE_BONUS)}
-        >
-          Activate bonus
-        </div>
+          <div
+            className="promocode-card__activate-button"
+            role="button"
+            tabIndex={-1}
+            onKeyPress={() => action(POST_ACTIVATE_BONUS)}
+            onClick={() => action(POST_ACTIVATE_BONUS)}
+          >
+            Activate bonus
+          </div>
         )}
       </div>
     </div>
