@@ -1,4 +1,4 @@
-import { CHANGE_STATUS_BONUS, SAVE_DATA } from './actionTypes';
+import { CHANGE_BONUS, SAVE_DATA } from './actionTypes';
 import {
   ICard, ISaveBonus, ISaveData, IServerResponse,
 } from '../Interface';
@@ -8,6 +8,6 @@ export const actionSaveData = (data: IServerResponse):ISaveData => ({
   payload: data,
 });
 export const actionSaveBonus = (data: ICard[]):ISaveBonus => ({
-  type: CHANGE_STATUS_BONUS,
+  type: CHANGE_BONUS,
   payload: data,
 });

@@ -1,9 +1,13 @@
 import React, { useRef } from 'react';
 import './styles.scss';
+import { useDispatch } from 'react-redux';
 import icon_copy from '../../icon/copy.svg';
 import { ICard } from '../../Interface';
+import { POST_ACTIVATE_BONUS } from '../../data/actionTypes';
 
-const PromocodeCard: React.FC<ICard> = ({ title, description, promocode }) => {
+const PromocodeCard: React.FC<ICard> = ({
+  title, description, promocode, id, isUsed,
+}) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const copyPromo = (): void => {
     if (inputEl.current) {
@@ -11,7 +15,8 @@ const PromocodeCard: React.FC<ICard> = ({ title, description, promocode }) => {
       document.execCommand('copy');
     }
   };
-
+  const dispatch = useDispatch();
+  const action = (type:string) => dispatch({ type, id });
   return (
     <div className="promocode-card">
       <div className="promocode-card__describe">
@@ -26,7 +31,17 @@ const PromocodeCard: React.FC<ICard> = ({ title, description, promocode }) => {
         </div>
       </div>
       <div className="promocode-card__activate">
-        <div className="promocode-card__activate-button">Activate bonus</div>
+        {!isUsed && (
+        <div
+          className="promocode-card__activate-button"
+          role="button"
+          tabIndex={-1}
+          onKeyPress={() => action(POST_ACTIVATE_BONUS)}
+          onClick={() => action(POST_ACTIVATE_BONUS)}
+        >
+          Activate bonus
+        </div>
+        )}
       </div>
     </div>
   );

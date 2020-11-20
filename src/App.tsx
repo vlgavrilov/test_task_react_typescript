@@ -1,17 +1,21 @@
 import React from 'react';
 import './App.css';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
 import NavigateMenu from './components/NavigateMenu/NavagateMenu';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Services from './components/Services';
 import dataReducer from './data/reducers';
+import rootSaga from './sagas';
 
+const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   dataReducer,
-  // composeEnhancer(applyMiddleware(...middlewares)),
+  applyMiddleware(sagaMiddleware),
 );
+sagaMiddleware.run(rootSaga);
 
 function App() {
   return (

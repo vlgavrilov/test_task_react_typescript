@@ -1,12 +1,14 @@
 import { IServerResponse, SaveActionTypes } from '../Interface';
-import { CHANGE_STATUS_BONUS, SAVE_DATA } from './actionTypes';
+import { CHANGE_BONUS, SAVE_DATA } from './actionTypes';
 
 const initialState: IServerResponse = {
   bonuses: [{
+    id: 0,
     title: 'Title',
     description: 'Description',
     link: '',
     promocode: '',
+    isUsed: false,
   }],
   header: {
     balance: 0,
@@ -18,7 +20,7 @@ const initialState: IServerResponse = {
 const dataReducer = (state = initialState, action:SaveActionTypes):IServerResponse => {
   const { payload } = action;
   switch (action.type) {
-    case CHANGE_STATUS_BONUS: {
+    case CHANGE_BONUS: {
       return {
         ...state,
         bonuses: [

@@ -1,8 +1,10 @@
 export interface ICard {
-  title: string;
-  description: string;
-  promocode: string;
-  link: string;
+  id: number
+  title: string
+  description: string
+  promocode: string
+  link: string
+  isUsed: boolean
 }
 export interface IServerResponse {
   bonuses: ICard[];
@@ -10,18 +12,26 @@ export interface IServerResponse {
 }
 
 export interface IHeader {
-  balance: number,
-  next_payout: number,
-  currency: string,
+  balance: number
+  next_payout: number
+  currency: string
 }
 
 export interface ISaveData {
-  type: string,
-  payload: IServerResponse,
+  type: string
+  payload: IServerResponse
+}
+export interface IActivateBonus {
+  type: string
+  id: number
+}
+export interface IFilterBonus {
+  type: string
+  value: string
 }
 export interface ISaveBonus {
-  type: string,
-  payload: ICard[],
+  type: string
+  payload: ICard[]
 }
 
 export type SaveActionTypes = ISaveData | ISaveBonus;
