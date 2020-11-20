@@ -1,13 +1,5 @@
-import { ICard } from '../Interface';
+import { ICard, IServerResponse } from '../Interface';
 
-interface IServerResponse {
-  bonuses: ICard[];
-  header: {
-    balance: number,
-    next_payout: number,
-    currency: string,
-  },
-}
 export const mockData :IServerResponse = {
   bonuses: [{
     title: 'Sitecostructor.io',

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './styles.scss';
+import { useSelector } from 'react-redux';
 import PromocodeCard from '../PromocodeCard';
-import { mockData } from '../../helpers/mockData';
+import { ICard, IServerResponse } from '../../Interface';
 
 const Services: React.FC = () => {
   const [filter, setFilter] = useState('');
+  const bonuses = useSelector((state: IServerResponse):ICard[] => state.bonuses);
 
   return (
     <div className="services">
@@ -21,7 +23,7 @@ const Services: React.FC = () => {
         </div>
       </div>
       <div>
-        {mockData.bonuses.map((item) => (
+        {bonuses.map((item) => (
           <PromocodeCard
             key={item.title + item.promocode}
             title={item.title}
