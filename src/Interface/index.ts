@@ -43,5 +43,3 @@ export interface ISaveIsLoading {
   type: string
   payload: boolean
 }
-
-export type SaveActionTypes = ISaveData | ISaveBonus | ISaveIsLoading;

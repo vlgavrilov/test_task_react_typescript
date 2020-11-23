@@ -1,5 +1,5 @@
 import {
-  IServerResponse, IState, SaveActionTypes,
+  IServerResponse, IState, ICard, ISaveData, ISaveBonus, ISaveIsLoading,
 } from '../Interface';
 import {
   BONUSES_LOADING, CHANGE_BONUS, HEADER_LOADING, SAVE_DATA,
@@ -23,15 +23,14 @@ const initialState: IState = {
   isHeaderLoading: true,
 };
 
-const dataReducer = (state = initialState, action:SaveActionTypes):IState => {
+const dataReducer = (state = initialState, action:ISaveData | ISaveBonus | ISaveIsLoading)
+:IState => {
   const { payload } = action;
   switch (action.type) {
     case CHANGE_BONUS: {
       return {
         ...state,
-        bonuses: [
-          ...payload,
-        ],
+        bonuses: payload as ICard[],
         isBonusesLoading: false,
       };
     }
