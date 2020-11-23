@@ -4,170 +4,190 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, createStore } from 'redux';
+import { all, put } from 'redux-saga/effects';
 import dataReducer from '../redux/reducers';
-import rootSaga from '../sagas';
+import { watchActivateBonus, watchFilterBonus } from '../sagas';
 import Services from '../components/Services';
+import { SAVE_DATA } from '../redux/actionTypes';
+import mockData from '../helpers/mockData';
 
 const sagaMiddleware = createSagaMiddleware();
+function* mockDownloadData() {
+  yield put({
+    type: SAVE_DATA,
+    payload: mockData,
+  });
+}
 
-const store = createStore(
-  dataReducer,
-  applyMiddleware(sagaMiddleware),
-);
-sagaMiddleware.run(rootSaga);
+function* mockRootSagaFirstLoad() {
+  yield all([
+    mockDownloadData(),
+  ]);
+}
+
+function* mockRootSagaAllHandler() {
+  yield all([
+    watchFilterBonus(),
+    watchActivateBonus(),
+    mockDownloadData(),
+  ]);
+}
 
 describe('<Services />', () => {
   test('should display the component with an empty loading card', async () => {
+    const mockStore = createStore(
+      dataReducer,
+    );
+
     render(
-      <Provider store={store}>
+      <Provider store={mockStore}>
         <Services />
       </Provider>,
     );
-    const titleElement = screen.getByText(/Title/i);
-    const descriptionElement = screen.getByText(/Description/i);
-    const promocodeElement = screen.getByText(/Services/i);
-    const ButtonActivateElement = screen.getByText(/Reset/i);
-    const loader = await screen.findByTestId('loader');
+
+    expect(screen).toMatchSnapshot();
+  });
+
+  test('should display all cards', async () => {
+    const mockStore = createStore(
+      dataReducer,
+      applyMiddleware(sagaMiddleware),
+    );
+    sagaMiddleware.run(mockRootSagaFirstLoad);
+    render(
+      <Provider store={mockStore}>
+        <Services />
+      </Provider>,
+    );
+
+    const titleElements = screen.getAllByTestId('promocode-title');
+    const descriptionElements = screen.getAllByTestId('promocode-description');
     const inputFilter = await screen.findByTestId('input-filter');
+    const loader = await screen.queryByTestId('loader');
+    const defaultTitleElement = screen.queryByText(/Title/i);
+    const defaultDescriptionElement = screen.queryByText(/Description/i);
 
     expect(inputFilter).toBeInTheDocument();
-    expect(loader).toBeInTheDocument();
-    expect(titleElement).toBeInTheDocument();
-    expect(descriptionElement).toBeInTheDocument();
-    expect(promocodeElement).toBeInTheDocument();
-    expect(ButtonActivateElement).toBeInTheDocument();
+    expect(loader).toBeNull();
+    expect(titleElements.length).toEqual(mockData.bonuses.length);
+    expect(titleElements[1].innerHTML).toEqual(mockData.bonuses[1].title);
+    expect(descriptionElements.length).toEqual(mockData.bonuses.length);
+    expect(descriptionElements[3].innerHTML).toEqual(mockData.bonuses[3].description);
+    expect(defaultTitleElement).not.toBeInTheDocument();
+    expect(defaultDescriptionElement).not.toBeInTheDocument();
   });
-
-  test('should display all cards', async (done) => {
+  test('should not display cards for a non-existent filter', async () => {
+    const mockStore = createStore(
+      dataReducer,
+      applyMiddleware(sagaMiddleware),
+    );
+    sagaMiddleware.run(mockRootSagaAllHandler);
     render(
-      <Provider store={store}>
+      <Provider store={mockStore}>
         <Services />
       </Provider>,
     );
-    setTimeout(() => {
-      const titleElement1 = screen.queryByText(/Sitecostructor/i);
-      const titleElement2 = screen.queryByText(/Appvision.com/i);
-      const defaultTitleElement = screen.queryByText(/Title/i);
-      const descriptionElement1 = screen.queryByText(/Site constructor/i);
-      const descriptionElement2 = screen.queryByText(/SDK/i);
-      const defaultDescriptionElement = screen.queryByText(/Description/i);
-      const promocodeElement = screen.getByText(/Services/i);
-      const ButtonActivateElement = screen.getByText(/Reset/i);
-
-      expect(defaultTitleElement).not.toBeInTheDocument();
-      expect(defaultDescriptionElement).not.toBeInTheDocument();
-      expect(titleElement1).toBeInTheDocument();
-      expect(titleElement2).toBeInTheDocument();
-      expect(descriptionElement1).toBeInTheDocument();
-      expect(descriptionElement2).toBeInTheDocument();
-      expect(promocodeElement).toBeInTheDocument();
-      expect(ButtonActivateElement).toBeInTheDocument();
-      done();
-    }, 900);
-  });
-  test('should not display cards for a non-existent filter', async (done) => {
-    render(
-      <Provider store={store}>
-        <Services />
-      </Provider>,
-    );
+    const testValueNotExist = 'test-value-not-exist';
     const input = await screen.findByTestId('input-filter');
-    fireEvent.change(input, { target: { value: 'test-value-not-exist' } });
+    fireEvent.change(input, { target: { value: testValueNotExist } });
 
-    setTimeout(() => {
-      const titleElement1 = screen.queryByText(/Sitecostructor/i);
-      const titleElement2 = screen.queryByText(/Appvision.com/i);
-      const defaultTitleElement = screen.queryByText(/Title/i);
-      const descriptionElement1 = screen.queryByText(/Site constructor/i);
-      const descriptionElement2 = screen.queryByText(/SDK/i);
-      const defaultDescriptionElement = screen.queryByText(/Description/i);
+    const titleElements = screen.queryAllByTestId('promocode-title');
+    const descriptionElements = screen.queryAllByTestId('promocode-description');
+    const inputFilter = await screen.findByTestId('input-filter');
+    const loader = await screen.queryByTestId('loader');
 
-      expect(defaultTitleElement).not.toBeInTheDocument();
-      expect(defaultDescriptionElement).not.toBeInTheDocument();
-      expect(titleElement1).not.toBeInTheDocument();
-      expect(titleElement2).not.toBeInTheDocument();
-      expect(descriptionElement1).not.toBeInTheDocument();
-      expect(descriptionElement2).not.toBeInTheDocument();
-      done();
-    }, 900);
+    expect(inputFilter.getAttribute('value')).toEqual(testValueNotExist);
+    expect(loader).toBeNull();
+    expect(titleElements.length).toEqual(0);
+    expect(descriptionElements.length).toEqual(0);
   });
-  test('should only display cards that match the query', async (done) => {
+  test('should only display cards that match the query', async () => {
+    const mockStore = createStore(
+      dataReducer,
+      applyMiddleware(sagaMiddleware),
+    );
+    sagaMiddleware.run(mockRootSagaAllHandler);
     render(
-      <Provider store={store}>
+      <Provider store={mockStore}>
         <Services />
       </Provider>,
     );
-    const input = await screen.findByTestId('input-filter');
-    fireEvent.change(input, { target: { value: 'Sitecostructor' } });
+    const filterValue = 'Sitecostructor';
+    const inputFilter = await screen.findByTestId('input-filter');
+    fireEvent.change(inputFilter, { target: { value: filterValue } });
 
-    setTimeout(() => {
-      const titleElement1 = screen.queryByText(/Sitecostructor/i);
-      const titleElement2 = screen.queryByText(/Appvision.com/i);
-      const defaultTitleElement = screen.queryByText(/Title/i);
-      const descriptionElement1 = screen.queryByText(/Site constructor/i);
-      const descriptionElement2 = screen.queryByText(/SDK/i);
-      const defaultDescriptionElement = screen.queryByText(/Description/i);
+    const titleElements = screen.queryAllByTestId('promocode-title');
+    const descriptionElements = screen.getAllByTestId('promocode-description');
 
-      expect(defaultTitleElement).not.toBeInTheDocument();
-      expect(defaultDescriptionElement).not.toBeInTheDocument();
-      expect(titleElement1).toBeInTheDocument();
-      expect(titleElement2).not.toBeInTheDocument();
-      expect(descriptionElement1).toBeInTheDocument();
-      expect(descriptionElement2).not.toBeInTheDocument();
-      done();
-    }, 900);
+    const loader = await screen.queryByTestId('loader');
+
+    const defaultTitleElement = screen.queryByText(/Title/i);
+    const defaultDescriptionElement = screen.queryByText(/Description/i);
+
+    expect(loader).toBeNull();
+    expect(inputFilter.getAttribute('value')).toEqual(filterValue);
+    expect(defaultTitleElement).not.toBeInTheDocument();
+    expect(defaultDescriptionElement).not.toBeInTheDocument();
+    expect(titleElements.length).toEqual(1);
+    expect(descriptionElements.length).toEqual(1);
   });
-  test('should display all cards', async (done) => {
+  test('should display all cards', async () => {
+    const mockStore = createStore(
+      dataReducer,
+      applyMiddleware(sagaMiddleware),
+    );
+    sagaMiddleware.run(mockRootSagaAllHandler);
     render(
-      <Provider store={store}>
+      <Provider store={mockStore}>
         <Services />
       </Provider>,
     );
-    const input = await screen.findByTestId('input-filter');
-    const buttonResset = await screen.findByTestId('button-reset-filter');
-    fireEvent.change(input, { target: { value: 'test-value-not-exist' } });
-    fireEvent.click(buttonResset);
+    const inputFilter = await screen.findByTestId('input-filter');
+    const buttonReset = await screen.findByTestId('button-reset-filter');
+    fireEvent.change(inputFilter, { target: { value: 'test-value-not-exist' } });
+    fireEvent.click(buttonReset);
 
-    setTimeout(() => {
-      const titleElement = screen.getByText(/Sitecostructor/i);
-      const defaultTitleElement = screen.queryByText(/Title/i);
-      const descriptionElement = screen.getByText(/Site constructor/i);
-      const defaultDescriptionElement = screen.queryByText(/Description/i);
-      const promocodeElement = screen.getByText(/Services/i);
-      const ButtonActivateElement = screen.getByText(/Reset/i);
+    const titleElements = screen.queryAllByTestId('promocode-title');
+    const descriptionElements = screen.getAllByTestId('promocode-description');
 
-      expect(defaultTitleElement).not.toBeInTheDocument();
-      expect(defaultDescriptionElement).not.toBeInTheDocument();
-      expect(titleElement).toBeInTheDocument();
-      expect(descriptionElement).toBeInTheDocument();
-      expect(promocodeElement).toBeInTheDocument();
-      expect(ButtonActivateElement).toBeInTheDocument();
-      done();
-    }, 900);
+    const loader = await screen.queryByTestId('loader');
+
+    const defaultTitleElement = screen.queryByText(/Title/i);
+    const defaultDescriptionElement = screen.queryByText(/Description/i);
+
+    expect(loader).toBeNull();
+    expect(inputFilter.getAttribute('value')).toEqual('');
+    expect(defaultTitleElement).not.toBeInTheDocument();
+    expect(defaultDescriptionElement).not.toBeInTheDocument();
+    expect(titleElements.length).toEqual(20);
+    expect(descriptionElements.length).toEqual(20);
   });
 
-  test('it should display the activated card', async (done) => {
+  test('it should display the activated card', async () => {
+    const mockStore = createStore(
+      dataReducer,
+      applyMiddleware(sagaMiddleware),
+    );
+    sagaMiddleware.run(mockRootSagaAllHandler);
     render(
-      <Provider store={store}>
+      <Provider store={mockStore}>
         <Services />
       </Provider>,
     );
-    const button = await screen.getAllByTestId('button-promocode-activate');
-    const buttonActivated = await screen.queryByText(/Activated!/i);
+    const defaultButtonsActive = await screen.getAllByTestId('button-promocode-activate');
+    const defaultButtonsUsed = await screen.queryAllByTestId('button-promocode-used');
 
-    expect(button[0]).toBeInTheDocument();
-    expect(buttonActivated).not.toBeInTheDocument();
+    expect(defaultButtonsActive.length).toEqual(20);
+    expect(defaultButtonsUsed.length).toEqual(0);
 
-    fireEvent.click(button[0], new MouseEvent('click', {
+    fireEvent.click(defaultButtonsActive[0], new MouseEvent('click', {
       bubbles: true,
       cancelable: true,
     }));
+    const newButtonsActive = await screen.getAllByTestId('button-promocode-activate');
+    const buttonButtonsUsed = await screen.queryAllByTestId('button-promocode-used');
 
-    setTimeout(async () => {
-      const buttonActivated2 = await screen.queryByText(/Activated!/i);
-
-      expect(buttonActivated2).toBeInTheDocument();
-      done();
-    }, 900);
+    expect(newButtonsActive.length).toEqual(19);
+    expect(buttonButtonsUsed.length).toEqual(1);
   });
 });

@@ -5,10 +5,9 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import PromocodeCard from '../components/PromocodeCard';
-import dataReducer from '../redux/reducers';
 
-const store = createStore(
-  dataReducer,
+const mockStore = createStore(
+  () => {},
 );
 
 describe('<PromocodeCard />', () => {
@@ -23,7 +22,7 @@ describe('<PromocodeCard />', () => {
     };
 
     render(
-      <Provider store={store}>
+      <Provider store={mockStore}>
         <PromocodeCard
           id={card.id}
           isUsed={card.isUsed}
@@ -34,15 +33,8 @@ describe('<PromocodeCard />', () => {
         />
       </Provider>,
     );
-    const titleElement = screen.getByText(/Title/i);
-    const descriptionElement = screen.getByText(/Description/i);
-    const promocodeElement = screen.getByText(/Promocode/i);
-    const ButtonActivateElement = screen.getByText(/Activate bonus/i);
 
-    expect(titleElement).toBeInTheDocument();
-    expect(descriptionElement).toBeInTheDocument();
-    expect(promocodeElement).toBeInTheDocument();
-    expect(ButtonActivateElement).toBeInTheDocument();
+    expect(screen).toMatchSnapshot();
   });
 
   test('should display a card with test redux', async () => {
@@ -55,7 +47,7 @@ describe('<PromocodeCard />', () => {
       isUsed: false,
     };
     render(
-      <Provider store={store}>
+      <Provider store={mockStore}>
         <PromocodeCard
           id={card.id}
           isUsed={card.isUsed}
@@ -67,12 +59,12 @@ describe('<PromocodeCard />', () => {
       </Provider>,
     );
 
-    const input = screen.getByDisplayValue('itpaycodes');
-    const titleElement = screen.getByText(/Certificates/i);
-    const descriptionElement = screen.getByText(/SSL/i);
+    const input = screen.getByTestId('promocode-input');
+    const titleElement = screen.getByTestId('promocode-title');
+    const descriptionElement = screen.getByTestId('promocode-description');
 
-    expect(titleElement).toBeInTheDocument();
-    expect(descriptionElement).toBeInTheDocument();
-    expect(input).toBeInTheDocument();
+    expect(titleElement.innerHTML).toEqual(card.title);
+    expect(descriptionElement.innerHTML).toEqual(card.description);
+    expect(input.getAttribute('value')).toEqual(card.promocode);
   });
 });

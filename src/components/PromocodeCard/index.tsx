@@ -20,19 +20,19 @@ const PromocodeCard: React.FC<ICard> = ({
   return (
     <div className="promocode-card">
       <div className="promocode-card__describe">
-        <div className="promocode-card__describe-title">{title || 'Title'}</div>
-        <div className="promocode-card__describe-description">{description || 'Description'}</div>
+        <div data-testid="promocode-title" className="promocode-card__describe-title">{title || 'Title'}</div>
+        <div data-testid="promocode-description" className="promocode-card__describe-description">{description || 'Description'}</div>
       </div>
       <div className="promocode-card__copy">
         <div className="promocode-card__copy-title">Promocode</div>
         <div tabIndex={-1} role="button" className="promocode-card__copy-field" onKeyPress={copyPromo} onClick={copyPromo}>
-          <input data-testid="input-promocode" className="promocode-card__copy-field-input" readOnly onKeyPress={copyPromo} defaultValue={promocode} ref={inputEl} />
+          <input data-testid="promocode-input" className="promocode-card__copy-field-input" readOnly onKeyPress={copyPromo} defaultValue={promocode} ref={inputEl} />
           <img className="promocode-card__copy-field-icon" src={icon_copy} alt="copy" />
         </div>
       </div>
       <div className="promocode-card__activate">
         {isUsed && (
-          <div className="promocode-card__activate-message">
+          <div data-testid="button-promocode-used" className="promocode-card__activate-message">
             Activated!
           </div>
         )}

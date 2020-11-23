@@ -8,12 +8,12 @@ const Header: React.FC = () => {
   return (
     <div className="header">
       <div className="header__info">
-        <div className="header__info-title">Balance</div>
-        <div className="header__info-text">{header.balance}</div>
+        <div data-testid="header-balance-title" className="header__info-title">Balance</div>
+        <div data-testid="header-balance-text" className="header__info-text">{header.balance}</div>
       </div>
       <div className="header__info">
-        <div className="header__info-title">Payout</div>
-        <div className="header__info-text">{header.next_payout}</div>
+        <div data-testid="header-payout-title" className="header__info-title">Payout</div>
+        <div data-testid="header-payout-text" className="header__info-text">{header.next_payout}</div>
       </div>
     </div>
   );

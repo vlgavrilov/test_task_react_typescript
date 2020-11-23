@@ -14,14 +14,18 @@ const delay = (ms:number) => new Promise((res) => setTimeout(res, ms));
 export const getBonuses = (state:IState):ICard[] => state.bonuses;
 
 function* downloadData() {
-  yield delay(700);
+  if (process.env.NODE_ENV !== 'test') {
+    yield delay(500);
+  }
   yield put({
     type: SAVE_DATA,
     payload: mockData,
   });
 }
 function* activateBonus(action:IActivateBonus) {
-  yield delay(700);
+  if (process.env.NODE_ENV !== 'test') {
+    yield delay(500);
+  }
   const data = yield select(getBonuses);
   // const newData = redux.find((item) => item.id === action.id);
   const newData = data.map((item:ICard) => {
@@ -51,8 +55,9 @@ function* filterBonus(action:IFilterBonus) {
     type: BONUSES_LOADING,
     payload: true,
   });
-
-  yield delay(500);
+  if (process.env.NODE_ENV !== 'test') {
+    yield delay(500);
+  }
   const newData = mockData.bonuses.filter((item:ICard) => (item.title.indexOf(action.value) + 1)
     || (item.description.indexOf(action.value) + 1)
     || (item.link.indexOf(action.value) + 1));
