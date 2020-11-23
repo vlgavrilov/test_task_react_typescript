@@ -3,9 +3,9 @@ import './App.scss';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import NavigateMenu from './components/NavigateMenu/NavagateMenu';
+import NavigateMenu from './components/NavigateMenu';
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Footer';
 import Services from './components/Services';
 import dataReducer from './data/reducers';
 import rootSaga from './sagas';
@@ -20,11 +20,12 @@ sagaMiddleware.run(rootSaga);
 function App() {
   return (
     <Provider store={store}>
-      <NavigateMenu>
+      <NavigateMenu />
+      <div className="children">
         <Header />
         <Services />
         <Footer />
-      </NavigateMenu>
+      </div>
       {/*  There may be a route, but it is not required with one element. */}
     </Provider>
   );

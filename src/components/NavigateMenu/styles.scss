@@ -15,12 +15,3 @@
     cursor: pointer;
   }
 }
-.children {
-  min-height: 100vh;
-  background: #F5F7FA;
-  position: relative;
-  left: 80px;
-  width: calc(100% - 80px);
-  display: flex;
-  flex-direction: column;
-}
