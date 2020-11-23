@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<NavigateMenu /> should display a blank login form, with remember me checked by default 1`] = `
+exports[`<NavigateMenu /> renders correctly 1`] = `
 Object {
   "debug": [Function],
   "findAllByAltText": [Function],

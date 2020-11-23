@@ -14,7 +14,6 @@ export interface IState {
   bonuses: ICard[]
   header: IHeader
   isBonusesLoading:boolean
-  isHeaderLoading:boolean
 }
 
 export interface IHeader {

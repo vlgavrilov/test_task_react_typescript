@@ -3,7 +3,7 @@ import './styles.scss';
 import { useDispatch } from 'react-redux';
 import icon_copy from '../../icon/copy.svg';
 import { ICard } from '../../Interface';
-import { POST_ACTIVATE_BONUS } from '../../data/actionTypes';
+import { POST_ACTIVATE_BONUS } from '../../redux/actionTypes';
 
 const PromocodeCard: React.FC<ICard> = ({
   title, description, promocode, id, isUsed,
@@ -20,13 +20,13 @@ const PromocodeCard: React.FC<ICard> = ({
   return (
     <div className="promocode-card">
       <div className="promocode-card__describe">
-        <div className="promocode-card__describe-title">{title}</div>
-        <div className="promocode-card__describe-description">{description}</div>
+        <div className="promocode-card__describe-title">{title || 'Title'}</div>
+        <div className="promocode-card__describe-description">{description || 'Description'}</div>
       </div>
       <div className="promocode-card__copy">
         <div className="promocode-card__copy-title">Promocode</div>
-        <div role="button" tabIndex={-1} className="promocode-card__copy-field" onKeyPress={copyPromo} onClick={copyPromo}>
-          <input className="promocode-card__copy-field-input" readOnly onKeyPress={copyPromo} defaultValue={promocode} ref={inputEl} />
+        <div tabIndex={-1} role="button" className="promocode-card__copy-field" onKeyPress={copyPromo} onClick={copyPromo}>
+          <input data-testid="input-promocode" className="promocode-card__copy-field-input" readOnly onKeyPress={copyPromo} defaultValue={promocode} ref={inputEl} />
           <img className="promocode-card__copy-field-icon" src={icon_copy} alt="copy" />
         </div>
       </div>
@@ -39,6 +39,7 @@ const PromocodeCard: React.FC<ICard> = ({
         {!isUsed && (
           <div
             className="promocode-card__activate-button"
+            data-testid="button-promocode-activate"
             role="button"
             tabIndex={-1}
             onKeyPress={() => action(POST_ACTIVATE_BONUS)}

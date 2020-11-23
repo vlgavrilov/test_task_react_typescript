@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Footer /> should display a blank login form, with remember me checked by default 1`] = `
+exports[`<Footer /> renders correctly 1`] = `
 Object {
   "debug": [Function],
   "findAllByAltText": [Function],

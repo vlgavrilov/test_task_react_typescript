@@ -4,10 +4,10 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import NavigateMenu from './components/NavigateMenu';
-import Header from './components/Header/Header';
+import Header from './components/Header';
 import Footer from './components/Footer';
 import Services from './components/Services';
-import dataReducer from './data/reducers';
+import dataReducer from './redux/reducers';
 import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();

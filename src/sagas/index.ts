@@ -5,7 +5,7 @@ import mockData from '../helpers/mockData';
 import {
   BONUSES_LOADING,
   CHANGE_BONUS, POST_ACTIVATE_BONUS, POST_FILTER_BONUS, SAVE_DATA,
-} from '../data/actionTypes';
+} from '../redux/actionTypes';
 import {
   ICard, IActivateBonus, IFilterBonus, IState,
 } from '../Interface';
@@ -14,16 +14,16 @@ const delay = (ms:number) => new Promise((res) => setTimeout(res, ms));
 export const getBonuses = (state:IState):ICard[] => state.bonuses;
 
 function* downloadData() {
-  yield delay(1000);
+  yield delay(700);
   yield put({
     type: SAVE_DATA,
     payload: mockData,
   });
 }
 function* activateBonus(action:IActivateBonus) {
-  yield delay(1000);
+  yield delay(700);
   const data = yield select(getBonuses);
-  // const newData = data.find((item) => item.id === action.id);
+  // const newData = redux.find((item) => item.id === action.id);
   const newData = data.map((item:ICard) => {
     if (item.id === action.id) {
       return { ...item, isUsed: true };
@@ -40,8 +40,8 @@ function* filterBonus(action:IFilterBonus) {
     type: CHANGE_BONUS,
     payload: [{
       id: 0,
-      title: 'Title',
-      description: 'Description',
+      title: '',
+      description: '',
       link: '',
       promocode: '',
       isUsed: false,

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1606134418751" clover="3.2.0">
+  <project timestamp="1606134418751" name="All files">
+    <metrics statements="66" coveredstatements="61" conditionals="22" coveredconditionals="20" methods="30" coveredmethods="27" elements="118" coveredelements="108" complexity="0" loc="66" ncloc="66" packages="8" files="9" classes="9"/>
+    <package name="components.Footer">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="/Users/g.vladimir/work/test_task_react_typescript/src/components/Footer/index.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.Header">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="index.tsx" path="/Users/g.vladimir/work/test_task_react_typescript/src/components/Header/index.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.NavigateMenu">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="/Users/g.vladimir/work/test_task_react_typescript/src/components/NavigateMenu/index.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.PromocodeCard">
+      <metrics statements="11" coveredstatements="7" conditionals="10" coveredconditionals="8" methods="5" coveredmethods="3"/>
+      <file name="index.tsx" path="/Users/g.vladimir/work/test_task_react_typescript/src/components/PromocodeCard/index.tsx">
+        <metrics statements="11" coveredstatements="7" conditionals="10" coveredconditionals="8" methods="5" coveredmethods="3"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="11" count="110" type="stmt"/>
+        <line num="12" count="110" type="stmt"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="110" type="stmt"/>
+        <line num="19" count="110" type="stmt"/>
+        <line num="20" count="110" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.Services">
+      <metrics statements="14" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="8"/>
+      <file name="index.tsx" path="/Users/g.vladimir/work/test_task_react_typescript/src/components/Services/index.tsx">
+        <metrics statements="14" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="8"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="15" type="stmt"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="12" count="15" type="stmt"/>
+        <line num="13" count="15" type="stmt"/>
+        <line num="14" count="15" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="19" count="15" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="47" count="108" type="stmt"/>
+      </file>
+    </package>
+    <package name="helpers">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="mockData.ts" path="/Users/g.vladimir/work/test_task_react_typescript/src/helpers/mockData.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="redux">
+      <metrics statements="13" coveredstatements="13" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+      <file name="actionTypes.ts" path="/Users/g.vladimir/work/test_task_react_typescript/src/redux/actionTypes.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+      </file>
+      <file name="reducers.ts" path="/Users/g.vladimir/work/test_task_react_typescript/src/redux/reducers.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="25" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="26" type="stmt"/>
+        <line num="28" count="26" type="cond" truecount="4" falsecount="0"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="44" count="7" type="stmt"/>
+        <line num="50" count="9" type="stmt"/>
+      </file>
+    </package>
+    <package name="sagas">
+      <metrics statements="20" coveredstatements="20" conditionals="5" coveredconditionals="5" methods="11" coveredmethods="11"/>
+      <file name="index.ts" path="/Users/g.vladimir/work/test_task_react_typescript/src/sagas/index.ts">
+        <metrics statements="20" coveredstatements="20" conditionals="5" coveredconditionals="5" methods="11" coveredmethods="11"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="19" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="39" count="4" type="stmt"/>
+        <line num="50" count="4" type="stmt"/>
+        <line num="55" count="4" type="stmt"/>
+        <line num="56" count="60" type="cond" truecount="3" falsecount="0"/>
+        <line num="59" count="3" type="stmt"/>
+        <line num="63" count="3" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
+        <line num="76" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

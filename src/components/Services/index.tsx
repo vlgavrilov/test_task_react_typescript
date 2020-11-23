@@ -3,7 +3,7 @@ import './styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import PromocodeCard from '../PromocodeCard';
 import { ICard, IState } from '../../Interface';
-import { POST_FILTER_BONUS } from '../../data/actionTypes';
+import { POST_FILTER_BONUS } from '../../redux/actionTypes';
 
 const Services: React.FC = () => {
   const [filter, setFilter] = useState('');
@@ -23,15 +23,26 @@ const Services: React.FC = () => {
         <div className="services__filter-text"> Filter</div>
         <div className="services__filter-block">
           <input
+            data-testid="input-filter"
             className="services__filter-block-input"
             onChange={(e) => filterHandler(e.target.value)}
             value={filter}
           />
-          <div role="button" tabIndex={-3} className="services__filter-block-button" onKeyPress={() => filterHandler('')} onClick={() => filterHandler('')}> Reset</div>
+          <div
+            role="button"
+            data-testid="button-reset-filter"
+            tabIndex={-3}
+            className="services__filter-block-button"
+            onKeyPress={() => filterHandler('')}
+            onClick={() => filterHandler('')}
+          >
+            {' '}
+            Reset
+          </div>
         </div>
       </div>
       <div>
-        {isBonusesLoading && <div className="lds-dual-ring" />}
+        {isBonusesLoading && <div data-testid="loader" className="lds-dual-ring" />}
         {bonuses.map((item) => (
           <PromocodeCard
             id={item.id}
@@ -42,8 +53,6 @@ const Services: React.FC = () => {
             promocode={item.promocode}
             link={item.promocode}
           />
-          // The key must be unique and come from the server.
-          // But there is no ID in the example server data
         ))}
       </div>
     </div>
