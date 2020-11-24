@@ -15,7 +15,7 @@ To start without Docker:
 ```
 cd test_task_react_typescript/
 npm install
-npm start dev
+npm run dev
 ```
 
 2. To compiled the app, please run:
