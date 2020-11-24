@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './styles.scss';
 import { useDispatch } from 'react-redux';
 import icon_copy from '../../icon/copy.svg';
@@ -9,10 +9,13 @@ const PromocodeCard: React.FC<ICard> = ({
   title, description, promocode, id, isUsed,
 }) => {
   const inputEl = useRef<HTMLInputElement>(null);
+  const [isCopy, setCopy] = useState(false);
   const copyPromo = (): void => {
     if (inputEl.current) {
       inputEl.current.select();
       document.execCommand('copy');
+      setCopy(true);
+      setTimeout(() => setCopy(false), 500);
     }
   };
   const dispatch = useDispatch();
@@ -29,6 +32,7 @@ const PromocodeCard: React.FC<ICard> = ({
           <input data-testid="promocode-input" className="promocode-card__copy-field-input" readOnly onKeyPress={copyPromo} defaultValue={promocode} ref={inputEl} />
           <img className="promocode-card__copy-field-icon" src={icon_copy} alt="copy" />
         </div>
+        {isCopy && <div className="promocode-card__copy-field-copied"> Copied </div> }
       </div>
       <div className="promocode-card__activate">
         {isUsed && (

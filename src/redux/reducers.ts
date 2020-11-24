@@ -6,14 +6,7 @@ import {
 } from './actionTypes';
 
 const initialState: IState = {
-  bonuses: [{
-    id: 0,
-    title: '',
-    description: '',
-    link: '',
-    promocode: '',
-    isUsed: false,
-  }],
+  bonuses: [],
   header: {
     balance: 0,
     next_payout: 0,

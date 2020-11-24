@@ -1,6 +1,10 @@
 .services {
   padding: 32px;
   flex: 1 0 auto;
+  &__filter-no-found{
+    margin: 20px auto;
+    text-align: center
+  }
   &__title{
     font-size: 39px;
     color: #262626;
@@ -16,6 +20,7 @@
       display: flex;
       flex-direction: row;
       &-input {
+        width: 300px;
         padding-left: 17px;
         height: 48px;
         top: 24px;
@@ -50,7 +55,8 @@
     }
   }
 }
-.lds-dual-ring {
+.loader {
+  margin-top: 26px;
   display: inline-block;
   position: absolute;
   width: 100%;

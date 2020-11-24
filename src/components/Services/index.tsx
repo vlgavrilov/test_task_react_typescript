@@ -20,7 +20,7 @@ const Services: React.FC = () => {
     <div className="services">
       <div className="services__title"> Services</div>
       <div className="services__filter">
-        <div className="services__filter-text"> Filter</div>
+        <div className="services__filter-text"> FILTER</div>
         <div className="services__filter-block">
           <input
             data-testid="input-filter"
@@ -42,8 +42,9 @@ const Services: React.FC = () => {
         </div>
       </div>
       <div>
-        {isBonusesLoading && <div data-testid="loader" className="lds-dual-ring" />}
-        {bonuses.map((item) => (
+        {!bonuses.length && !isBonusesLoading && <div className="services__filter-no-found"> No services found </div>}
+        {isBonusesLoading && <div data-testid="loader" className="loader" />}
+        {!isBonusesLoading && bonuses.map((item) => (
           <PromocodeCard
             id={item.id}
             key={item.id}

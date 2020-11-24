@@ -42,14 +42,7 @@ function* activateBonus(action:IActivateBonus) {
 function* filterBonus(action:IFilterBonus) {
   yield put({
     type: CHANGE_BONUS,
-    payload: [{
-      id: 0,
-      title: '',
-      description: '',
-      link: '',
-      promocode: '',
-      isUsed: false,
-    }],
+    payload: [],
   });
   yield put({
     type: BONUSES_LOADING,
@@ -58,9 +51,9 @@ function* filterBonus(action:IFilterBonus) {
   if (process.env.NODE_ENV !== 'test') {
     yield delay(500);
   }
-  const newData = mockData.bonuses.filter((item:ICard) => (item.title.indexOf(action.value) + 1)
-    || (item.description.indexOf(action.value) + 1)
-    || (item.link.indexOf(action.value) + 1));
+  const newData = mockData.bonuses
+    .filter((item:ICard) => (item.title.toLowerCase().indexOf(action.value.toLowerCase()) + 1));
+
   yield put({
     type: CHANGE_BONUS,
     payload: newData,

@@ -34,12 +34,31 @@
       box-sizing: border-box;
       border-radius: 4px;
       cursor: pointer;
+      &-copied {
+        width: 80px;
+        left: 229px;
+        text-align: center;
+        bottom: 20px;
+        padding: 10px;
+        position: relative;
+        border-radius: 4px;
+        background-color: #434343;
+        color: white;
+      }
       &-input {
         border: 0;
         outline:none;
         padding: 13px 0 0 17px;
         font-size: 15px;
         cursor: pointer;
+        &::after {
+          height: 100px;
+          width: 100px;
+          background-color: red;
+        }
+        &--copied{
+
+        }
       }
       &-icon {
         position: absolute;
