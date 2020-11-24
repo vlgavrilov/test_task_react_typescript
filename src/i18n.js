@@ -12,7 +12,7 @@ const resources = {
       promocode: 'Промокод',
       services: 'Сервисы',
       filter: 'ФИЛЬТР',
-      Activated: 'Активировано!',
+      activated: 'Активировано!',
       'activate bonus': 'Активировать бонус',
       copied: 'Скопировано',
       'no services found': 'Сервисов не найдено',
@@ -27,12 +27,16 @@ const resources = {
       promocode: 'Promocode',
       services: 'Services',
       filter: 'FILTER',
-      Activated: 'Activated!',
+      activated: 'Activated!',
       'activate bonus': 'Activate bonus',
       copied: 'Copied',
       'no services found': 'No services found',
     },
   },
+};
+const detectionOptions = {
+  order: ['path', 'cookie', 'navigator', 'localStorage', 'subdomain', 'queryString', 'htmlTag'],
+  lookupFromPathIndex: 0,
 };
 
 i18n
