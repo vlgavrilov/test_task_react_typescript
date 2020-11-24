@@ -54,12 +54,12 @@ docker-compose up
 Run `npm test` to execute the unit tests via Jest.
 
 
-##Localization (i18n added to the project)
+## Localization (i18n added to the project)
 
 To run eng language `http://localhost:9001/?lng=en`
 
 To run ru language `http://localhost:9001/?lng=ru`
 
-##Demo
+## Demo
 
 ![](demo.gif)
