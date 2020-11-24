@@ -60,3 +60,6 @@ To run eng language `http://localhost:9001/?lng=en`
 
 To run ru language `http://localhost:9001/?lng=ru`
 
+##Demo
+
+![](demo.gif)
