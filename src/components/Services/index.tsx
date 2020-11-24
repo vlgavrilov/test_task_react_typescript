@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import './styles.scss';
+// @ts-ignore
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import PromocodeCard from '../PromocodeCard';
 import { ICard, IState } from '../../Interface';
 import { POST_FILTER_BONUS } from '../../redux/actionTypes';
+import './styles.scss';
 
 const Services: React.FC = () => {
   const [filter, setFilter] = useState('');
@@ -15,12 +17,19 @@ const Services: React.FC = () => {
     action(value);
     setFilter(value);
   };
+  const { t } = useTranslation();
 
   return (
     <div className="services">
-      <div className="services__title"> Services</div>
+      <div className="services__title">
+        {' '}
+        {t('services')}
+      </div>
       <div className="services__filter">
-        <div className="services__filter-text"> FILTER</div>
+        <div className="services__filter-text">
+          {' '}
+          {t('filter')}
+        </div>
         <div className="services__filter-block">
           <input
             data-testid="input-filter"
@@ -37,12 +46,16 @@ const Services: React.FC = () => {
             onClick={() => filterHandler('')}
           >
             {' '}
-            Reset
+            {t('reset')}
           </div>
         </div>
       </div>
       <div>
-        {!bonuses.length && !isBonusesLoading && <div className="services__filter-no-found"> No services found </div>}
+        {!bonuses.length && !isBonusesLoading && (
+        <div className="services__filter-no-found">
+          {t('no services found')}
+        </div>
+        )}
         {isBonusesLoading && <div data-testid="loader" className="loader" />}
         {!isBonusesLoading && bonuses.map((item) => (
           <PromocodeCard

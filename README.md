@@ -18,7 +18,7 @@ npm install
 npm start dev
 ```
 
-2. To start the app, please run:
+2. To compiled the app, please run:
 
 ```
 cd test_task_react_typescript/
@@ -52,3 +52,11 @@ docker-compose up
 ## Running unit tests
 
 Run `npm test` to execute the unit tests via Jest.
+
+
+##Localization (i18n added to the project)
+
+To run eng language `http://localhost:9001/?lng=en`
+
+To run ru language `http://localhost:9001/?lng=ru`
+
